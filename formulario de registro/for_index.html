@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="form.css">
+    <title>Formulario Registro</title>
+</head>
+
+<body>
+    <section class="register" id="register">
+        <form id="miFormulario">
+            <h4>Formulario Registro</h4>
+            <h3 id="alert" class="alert"></h3>
+            <input class="controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su Nombre" required>
+            <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido"
+                required>
+            <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo" required>
+            <div class="genero" id="generoo">
+                <label class="desplegable" for="genero">GENERO</label>
+                <select class="gen-select" name="genero" id="genero">
+                    <option value="man">Hombre</option>
+                    <option value="women">Mujer</option>
+                </select>
+            </div>
+            <div class="documento" id="Documentoo">
+                <label class="desplegable" for="Document">Tipo de Documento</label>
+                <select class="ge-select" name="Documento" id="Documento">
+                    <option value="CC">CC</option>
+                    <option value="CE">CE</option>
+                    <option value="TI">TI</option>
+                </select>
+            </div>
+            <input class="controls" type="text" name="documento" id="documento" placeholder="Ingrese su Documento"
+                required>
+            <input class="controls" type="text" name="Telefono" id="Telefono" placeholder="Telefono" required>
+            <input class="controls" type="date" name="date" id="date" placeholder="Fecha de nacimiento" required>
+            <button class="Registrar" type="button" onclick="validar()">Registrar</button>
+        </form>
+    </section>
+    <script>
+        function Registrar() {
+            let Datos = [];
+            let nombre = document.getElementById("nombres").value;
+            let apellido = document.getElementById("apellidos").value;
+            let correo = document.getElementById("correo").value;
+            let genero = document.getElementById("genero").value;
+            let tipoDocumento = document.getElementById("Documento").value;
+            let numeroDocumento = document.getElementById("documento").value;
+            let telefono = document.getElementById("Telefono").value;
+            let fechaNacimiento = document.getElementById("date").value;
+
+            let persona = {
+                nombre: nombre,
+                apellido: apellido,
+                correo: correo,
+                genero: genero,
+                tipoDocumento: tipoDocumento,
+                numeroDocumento: numeroDocumento,
+                telefono: telefono,
+                fechaNacimiento: fechaNacimiento,
+            };
+
+            Datos.push(persona);
+
+            alert("Su informacion fue registrada");
+
+            document.getElementById("miFormulario").reset();
+            console.log(Datos);
+        }
+
+        function validar() {
+            const correo = document.getElementById("correo").value;
+            const rule = new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\.com$");
+            const docu = document.getElementById("documento").value;
+            const Tele = document.getElementById("Telefono").value;
+            if (document.getElementById("nombres").value == "") {
+                document.getElementById("alert").textContent = "Por favor el nombre esta vacio"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (document.getElementById("apellidos").value == "") {
+                document.getElementById("alert").textContent = "Por favor el apellido esta vacio"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (document.getElementById("correo").value == "") {
+                document.getElementById("alert").textContent = "Por favor el correo esta vacio"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (!correo.includes("@")) {
+                document.getElementById("alert").textContent = "El correo debe contener un @"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (!rule.test(correo)) {
+                document.getElementById("alert").textContent = "Por favor ingrese correo valido (correo@dominio.com)"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (!genero) {
+                document.getElementById("alert").textContent = "Por favor escoja un genero valido"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (!Documento) {
+                document.getElementById("alert").textContent = "Por favor escoja un tipo de documento valido"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (document.getElementById("documento").value == "") {
+                document.getElementById("alert").textContent = "Por favor el numero de documento esta vacio"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (/[^\d]/.test(docu)) {
+                document.getElementById("alert").textContent = "Por favor ingrese un numero de documento valido"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (document.getElementById("Telefono").value == "") {
+                document.getElementById("alert").textContent = "Por favor el numero de telefono esta vacio"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (/[^\d]/.test(Tele)) {
+                document.getElementById("alert").textContent = "Por favor ingrese un numero de telefono valido"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else if (document.getElementById("date").value == "") {
+                document.getElementById("alert").textContent = "Por favor la fecha esta vacia"
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = ""
+                }, 3000);
+            } else Registrar();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    background-color: #99a3a4;
+}
+
+.img1{
+  margin-left: 10%;
+}
+
+section{
+    height: 100vh;
+    width: 60%;
+}
+
+.contenedor{
+    display: flex;
+}
+
+.barra{
+    background:linear-gradient(to bottom, rgb(105, 224, 224),#618b73);
+    width: 5%;
+}
+
+.enca{
+    width: 93%;
+    background-color: white;
+   
+}
+
+.head{
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+.titulo{
+    text-transform: uppercase;
+    color: #00b8a9;
+    font-weight: bold;
+    font-size: 55px;
+    letter-spacing: 0.1em;
+    margin-right: 30px;
+    margin-top: 120px;
+    transform: scaleY(1.3);
+   
+}
+
+
+.fec_fac{
+    
+    text-transform: uppercase;
+    color: #00b8a9;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-top: 20px;
+}
+.codife{
+    margin-top: 20px;
+}
+
+.informacion{
+    display: flex;
+    gap: 5px;
+    
+}
+
+.contenedor_{
+    display: flex;
+    margin-left: 65px;
+    margin-top: 90px;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 70px;
+}
+
+.name{
+    color: #00b8a9;
+    margin-bottom: 20px;
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    transform: scaleY(1.8);
+    font-family:Verdana, sans-serif;
+}
+
+.information{
+     transform: scaleY(1.2);
+     letter-spacing: 0.1em;
+     font-size: 13px;
+     font-family: Tahoma, sans-serif;
+     font-weight: bold ;
+
+}
+
+.pagocon{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-top: 43px;
+    gap: 2px;
+  
+}
+
+.pagos{
+    display:flex ;
+    justify-content : end;
+    color: #00b8a9;
+    letter-spacing: 0.3em;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-right: 118px;
+
+ 
+}
+.cuenta{
+    letter-spacing: 0.1em;
+}
+
+.gmail{
+    letter-spacing: 0.1em;
+}
+.cuenta{
+    display: flex;
+    margin-right: 110px;
+    gap: 5px;   
+    font-size: 14px; 
+}
+
+.correoconta{
+    display: flex;
+    margin-right: 110px;
+    gap: 5px;
+    font-size: 14px; 
+    
+}
+
+.correo{
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.cuentaescrito{
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.tablas{
+    display: flex;
+    justify-content: center;
+}
+
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: 90%;
+}
+
+.table td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 5px;
+}
+
+.table th {
+    border-color: black;
+    border-style: solid;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 5px;
+    border-width: 1px;
+    font-size: 14px;
+}
+
+.table .tex2 {
+    border-color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.table .ti1 {
+    border-color: #ffffff;
+    font-size: 16px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.table .enu {
+    background-color: #00B8A9;
+    border-color: #00B8A9;
+    text-align: center;
+    vertical-align: top;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.table .tj {
+    background-color: #dcdcdc;
+    border-color: #dcdcdc;
+    text-align: left;
+    vertical-align: top;
+    font-size: 16px;
+}
+
+.table .tet {
+    background-color: #dcdcdc;
+    border-color: #dcdcdc;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.table tr:last-child td {
+    border-bottom: 4px solid #dcdcdc; 
+}
+.cont_tarjetas{
+    display: none;
+}
+
+.linea{
+    width: 90%;
+    border-radius: 10px;
+}
+
+.segucontenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: end; 
+    margin-right: 5%;
+    
+}
+
+.escrito_iva{
+    margin-bottom: 10px;
+}
+
+.escrito_total{
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+}
+.subtotal{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    width: 24%;
+}
+
+.iva{
+    display: flex;
+    justify-content: space-between;
+    width: 26%;
+    margin-top: 15px;
+}
+
+.total{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 23%;
+}
+
+.pesos{
+    margin-right: 50px;
+}
+.container_{
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+}
+
+.contan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.linea{
+    width: 90%;
+    border: 2px solid #00B8A9;
+}
+
+.container_contacto{
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 0.1em;
+    font-size: 14px;
+}
+
+.gracias{
+    display: flex;
+    justify-content: end;
+    margin-left: 150px;
+    font-size: 40px;
+    color: #00b8a9;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+    transform: scaleY(1.3);
+}
+.pie{
+    text-align: center;
+    margin-top: 30px;
+    letter-spacing: 0.1em;
+}
+
+@media(max-width: 1350px){
+    .container_{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container_contacto{
+        justify-content: center;
+    }
+
+    .container_g{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin:20px;
+    }
+
+    .gracias{
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+
+    .tablas, .segucontenedor{
+        display: none;
+    }
+
+    .cont_tarjetas{
+        display: block;
+    }
+
+    .cont_tarjetas{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .tarjetas{
+        border-radius: 10px;
+        background-color: #dcdcdc;
+        font-size: 19px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .articulo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #00B8A9;
+        margin-bottom: 20px;
+        color: #ffffff;
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .inicio_articulo{
+        margin-top: 10px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .escrito{
+        margin-bottom: 10px;
+    }
+
+    .informacion_tarjetas{
+        display: flex;
+    }
+
+    .tarjetas_inicio{
+        align-items: end;
+        margin-right: 20px;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tarjetas_inicio p{
+        margin-bottom: 20px;
+    }
+
+    .escrito_tarjetas{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .escrito_tarjetas p{
+        margin-bottom: 20px;
+    }
+
+    .tarjeta2{
+        background-color: #dcdcdc;
+        align-items: center;
+        justify-content: center;
+        font-size: 19px;
+        border-radius: 10px;
+        display: flex;
+    }
+
+    .inicio{
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        margin-right: 20px;
+        font-weight: bold;
+    }
+
+    .inicio p{
+        margin-bottom: 10px;
+    }
+
+    .cantidad_precio p{
+        margin-bottom: 10px;
+    }
+}
+
+@media(max-width: 1255px){
+    .container_00{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pagoconta{
+        align-items: end;
+    }
+}
+
+@media(max-width: 1000px){
+    section{
+        width: 90%;
+    }
+}
+
+@media(max-width: 645px){
+    .c_header{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img1{
+        margin-left: 0;
+        width: 30%;
+    }
+
+    .titulo{
+        margin-right: 0;
+        margin-top: 50px;
+    }
+}
+
+@media(max-width: 665px){
+    .cont_tarjetas{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width:450px){
+    .name{
+        margin-bottom: 20px;
+    }
+    .correoconta{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .cuentaconta{
+        display: flex;
+        flex-direction: column;
+    }
+    .container_{
+        margin-left: 30px;
+    }
+
+}
