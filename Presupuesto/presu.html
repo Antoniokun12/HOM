@@ -77,7 +77,7 @@
         actualizarRestante();
         if (presupuestoHabilitado) {
             mostrarMensajeTemporal(document.getElementById("mensajeError"), "Debe ingresar el presupuesto primero.", 3000);
-            return; 
+            return;
         }
 
         let nombre = document.getElementById("nombre").value;
@@ -156,7 +156,7 @@
 
     function borrar(i) {
         if (presupuestoHabilitado) {
-            return; 
+            return;
         }
         const valorEliminado = parseFloat(Datos[i].precio);
         Datos.splice(i, 1);
@@ -167,7 +167,7 @@
 
     function actualizarRestante(valorEliminado) {
         if (presupuestoHabilitado) {
-            return; 
+            return;
         }
         const presupuesto = parseFloat(document.getElementById("presupuesto").value);
         let totalGastos = 0;
