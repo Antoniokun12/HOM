@@ -104,5 +104,20 @@ body {
     justify-content: center;
     text-align: center;
     margin-bottom: 6%;
-    color: rgb(141, 59, 59);
+    color: red;
 }
+
+table{
+    width: 100%;
+    background-color: rgb(77, 71, 71);
+}
+
+td {
+    background-color: #D2B4DE; /* Color de fondo del encabezado */
+    color: black; /* Color del texto del encabezado */
+    font-weight: bold; /* Texto en negrita */
+    padding: 10px; /* Espaciado interno */
+    text-align: left; /* Alineación del texto a la izquierda */
+    border-bottom: 2px solid #2980b9; /* Borde inferior */
+}
+
