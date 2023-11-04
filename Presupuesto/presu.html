@@ -17,8 +17,8 @@
                 <input class="controls" type="number" name="presupuesto" id="presupuesto" placeholder="Presupuesto"
                     required>
                 <button class="butom" type="button" onclick="agregarPresupuesto()">Añadir</button>
-                <h3 id="mensajePresupuesto"></h3>
-                <h3 id="mensajePresupuestoAgotado"></h3>
+                <h3 id="mensajePresupuesto" class="hv"></h3>
+                <h3 id="mensajePresupuestoAgotado" class="hr"></h3>
                 <h2>Nombre del Gasto</h2>
                 <input class="controls" type="text" name="gasto" id="nombre" placeholder="Gasto" required>
                 <h2>Valor</h2>
@@ -36,151 +36,174 @@
                             <td></td>
                         </tr>
                     </thead>
-                    <tbody id="tabla">
-
-                    </tbody>
+                    <tbody id="tabla"></tbody>
                 </table>
-                <p>Total: <span id="total">0</span></p>
-                <p>Restante: <span id="restante">0</span></p>
+                <div class="colors">
+                    <h1>Total: <span id="total">0</span></h1>
+                </div>
+                <div class="colors">
+                    <h1>Restante: <span id="restante">0</span></h1>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-    <script>
-        let Datos = []
-        let op = null
-        let presupuestoHabilitado = true;
-        let presupuestoAgotado = false;
+</body>
 
-        function agregarPresupuesto() {
-            if (presupuestoHabilitado) {
-                const presupuesto = parseFloat(document.getElementById("presupuesto").value);
-                if (!isNaN(presupuesto)) {
-                    document.getElementById("total").textContent = presupuesto;
-                    presupuestoHabilitado = false;
-                    document.getElementById("presupuesto").disabled = true;
-                    mostrarMensajeTemporal(document.getElementById("mensajePresupuesto"), "Presupuesto ingresado con éxito", 3000);
-                } else {
-                    mostrarMensajeTemporal(document.getElementById("mensajePresupuesto"), "Por favor, ingrese un presupuesto válido.", 3000);
-                }
-            } else {
-                mostrarMensajeTemporal(document.getElementById("mensajePresupuesto"), "El presupuesto ya ha sido ingresado.", 3000);
-            }
-        }
+</html>
 
-        function Registrar() {
-            if (presupuestoHabilitado) {
-                mostrarMensajeTemporal(document.getElementById("mensajeError"), "Debe ingresar el presupuesto primero.", 3000);
-                return; // No se pueden agregar gastos antes de establecer el presupuesto
-            }
+<script>
+    let Datos = []
+    let op = null
+    let presupuestoHabilitado = true;
+    let presupuestoAgotado = false;
 
-            if (presupuestoAgotado) {
-                return; // No se pueden agregar gastos cuando el presupuesto está agotado
-            }
-
-            let nombre = document.getElementById("nombre").value;
-            let precio = document.getElementById("precio").value;
-
-            if (!nombre || !precio) {
-                // Mostrar un mensaje de error si algún campo está vacío
-                mostrarMensajeTemporal(document.getElementById("mensajeError"), "Rellene todos los campos.", 3000);
-                return;
-            }
-
-            // Restablecer el mensaje de error
-            document.getElementById("mensajeError").textContent = "";
-
-            if (op === true) {
-                Datos[indice].nombre = nombre;
-                Datos[indice].precio = precio;
-            } else {
-                Datos.push({
-                    nombre: nombre,
-                    precio: precio,
-                });
-            }
-
-            // Restablecer los campos de entrada a blanco
-            document.getElementById("nombre").value = "";
-            document.getElementById("precio").value = "";
-
-            console.log(Datos);
-            document.getElementById("tabla").innerHTML = "";
-            pintar();
-            op = false;
-            actualizarRestante();
-        }
-
-        function pintar() {
-            let frag = document.createDocumentFragment()
-
-            Datos.forEach((item, index) => {
-                let tr = document.createElement("tr")
-                let td1 = document.createElement("td")
-                let td2 = document.createElement("td")
-                let td3 = document.createElement("td")
-
-                let eliminar = document.createElement("button")
-
-                eliminar.textContent = "❌"
-                eliminar.addEventListener("click", () => {
-                    borrar(index)
-                })
-                td1.textContent = item.nombre;
-                td2.textContent = item.precio;
-
-                td3.appendChild(eliminar);
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
-
-                frag.appendChild(tr);
-                document.getElementById("tabla").appendChild(frag);
-            })
-        }
-
-        function borrar(i) {
-            if (presupuestoHabilitado) {
-                return; // No se pueden eliminar gastos antes de establecer el presupuesto
-            }
-            const valorEliminado = parseFloat(Datos[i].precio);
-            Datos.splice(i, 1);
-            document.getElementById("tabla").innerHTML = "";
-            pintar();
-            actualizarRestante(valorEliminado);
-        }
-
-        function actualizarRestante(valorEliminado) {
-            if (presupuestoHabilitado) {
-                return; // No se puede calcular el restante sin establecer el presupuesto
-            }
+    function agregarPresupuesto() {
+        if (presupuestoHabilitado) {
             const presupuesto = parseFloat(document.getElementById("presupuesto").value);
-            let totalGastos = 0;
-            Datos.forEach((item) => {
-                const valor = parseFloat(item.precio);
-                if (!isNaN(valor)) {
-                    totalGastos += valor;
-                }
-            });
-            const restante = presupuesto - totalGastos;
-            document.getElementById("restante").textContent = restante;
-
-            if (restante <= 0) {
-                document.getElementById("mensajePresupuestoAgotado").textContent = "Presupuesto agotado";
-                presupuestoAgotado = true;
+            if (!isNaN(presupuesto)) {
+                document.getElementById("total").textContent = presupuesto;
+                presupuestoHabilitado = false;
+                document.getElementById("presupuesto").disabled = true;
+                mostrarMensajeTemporal(document.getElementById("mensajePresupuesto"), "Presupuesto ingresado con éxito", 3000);
             } else {
-                document.getElementById("mensajePresupuestoAgotado").textContent = "";
-                presupuestoAgotado = false;
+                mostrarMensajeTemporal(document.getElementById("mensajePresupuesto"), "Por favor, ingrese un presupuesto válido.", 3000);
             }
+        } else {
+            mostrarMensajeTemporal(document.getElementById("mensajePresupuesto"), "El presupuesto ya ha sido ingresado.", 3000);
+        }
+    }
+
+    function Registrar() {
+        actualizarRestante();
+        if (presupuestoHabilitado) {
+            mostrarMensajeTemporal(document.getElementById("mensajeError"), "Debe ingresar el presupuesto primero.", 3000);
+            return; 
         }
 
-        function mostrarMensajeTemporal(elemento, mensaje, tiempo) {
-            elemento.textContent = mensaje;
-            setTimeout(function() {
-                elemento.textContent = "";
-            }, tiempo);
+        let nombre = document.getElementById("nombre").value;
+        let precio = parseFloat(document.getElementById("precio").value);
+
+        if (!nombre || isNaN(precio)) {
+            mostrarMensajeTemporal(document.getElementById("mensajeError"), "Rellene todos los campos y asegúrese de ingresar un valor numérico válido.", 3000);
+            return;
         }
-    </script>
+
+        document.getElementById("mensajeError").textContent = "";
+
+        if (precio <= 0) {
+            mostrarMensajeTemporal(document.getElementById("mensajeError"), "El valor del gasto debe ser mayor que cero.", 3000);
+            return;
+        }
+
+        const restante = parseFloat(document.getElementById("restante").textContent);
+
+        if (restante < precio) {
+            mostrarMensajeTemporal(document.getElementById("mensajeError"), "El gasto supera el valor restante del presupuesto.", 3000);
+            return;
+        }
+
+        if (op === true) {
+            Datos[indice].nombre = nombre;
+            Datos[indice].precio = precio;
+        } else {
+            Datos.push({
+                nombre: nombre,
+                precio: precio,
+            });
+        }
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("precio").value = "";
+
+        console.log(Datos);
+        document.getElementById("tabla").innerHTML = "";
+        pintar();
+        op = false;
+        actualizarRestante();
+
+    }
+
+
+
+
+    function pintar() {
+        let frag = document.createDocumentFragment()
+
+        Datos.forEach((item, index) => {
+            let tr = document.createElement("tr")
+            let td1 = document.createElement("td")
+            let td2 = document.createElement("td")
+            let td3 = document.createElement("td")
+
+            let eliminar = document.createElement("button")
+
+            eliminar.textContent = "❌"
+            eliminar.addEventListener("click", () => {
+                borrar(index)
+            })
+            td1.textContent = item.nombre;
+            td2.textContent = item.precio;
+
+            td3.appendChild(eliminar);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+
+            frag.appendChild(tr);
+            document.getElementById("tabla").appendChild(frag);
+        })
+    }
+
+    function borrar(i) {
+        if (presupuestoHabilitado) {
+            return; 
+        }
+        const valorEliminado = parseFloat(Datos[i].precio);
+        Datos.splice(i, 1);
+        document.getElementById("tabla").innerHTML = "";
+        pintar();
+        actualizarRestante(valorEliminado);
+    }
+
+    function actualizarRestante(valorEliminado) {
+        if (presupuestoHabilitado) {
+            return; 
+        }
+        const presupuesto = parseFloat(document.getElementById("presupuesto").value);
+        let totalGastos = 0;
+        Datos.forEach((item) => {
+            const valor = parseFloat(item.precio);
+            if (!isNaN(valor)) {
+                totalGastos += valor;
+            }
+        });
+        const restante = presupuesto - totalGastos;
+        document.getElementById("restante").textContent = restante;
+
+        if (restante <= 0) {
+            document.getElementById("mensajePresupuestoAgotado").textContent = "Presupuesto agotado";
+            presupuestoAgotado = true;
+        } else {
+            document.getElementById("mensajePresupuestoAgotado").textContent = "";
+            presupuestoAgotado = false;
+        }
+
+        if (restante <= (0.15 * presupuesto)) {
+            document.getElementById("restante").classList.add("cambio");
+        } else {
+            document.getElementById("restante").classList.remove("cambio");
+        }
+
+    }
+
+
+    function mostrarMensajeTemporal(elemento, mensaje, tiempo) {
+        elemento.textContent = mensaje;
+        setTimeout(function () {
+            elemento.textContent = "";
+        }, tiempo);
+    }
+</script>
 </body>
 
 </html>

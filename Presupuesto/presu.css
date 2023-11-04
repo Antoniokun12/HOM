@@ -28,14 +28,12 @@
 }
 
 .bl1{
-    border: 2px solid;
-    border-color: red;
+
     margin: 6%;
 }
 
 .bl2{
-    border: 2px solid;
-    border-color: black;
+
     margin: 6%;
 }
 
@@ -85,4 +83,20 @@ td {
 
 .siu{
     border: 2px solid #2980b9;
+}
+
+.colors{
+    background-color: rgb(149, 149, 218);
+    margin-bottom: 3%;
+}
+#restante.cambio {
+    background-color: rgb(230, 108, 108); /* Color rojo */
+}
+
+.hv{
+    background-color: rgb(121, 204, 121);
+}
+
+.hr{
+    background-color: rgb(230, 108, 108);
 }
