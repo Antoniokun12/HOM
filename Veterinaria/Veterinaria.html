@@ -272,7 +272,7 @@
 
                 fragment.appendChild(div);
 
-                // Mover la cita al contenedor correcto según su estado
+
                 switch (item.estado) {
                     case "Cita abierta":
                         document.getElementById("container").appendChild(fragment);
@@ -283,7 +283,7 @@
                     case "Cita anulada":
                         document.getElementById("container3").appendChild(fragment);
                         break;
-                    // Agregar más casos según sea necesario
+
                 }
                 document.getElementById("container").appendChild(fragment);
 
@@ -304,13 +304,12 @@
             var select = document.getElementById("miSelect_" + index);
             var nuevoEstado = select.options[select.selectedIndex].text;
 
-            // Encuentra la cita correspondiente en el arreglo Datos
+
             var cita = Datos[index];
 
-            // Actualiza el estado de la cita
+
             cita.estado = nuevoEstado;
 
-            // Mueve la cita al contenedor correspondiente
             switch (nuevoEstado) {
                 case "Cita abierta":
                     document.getElementById("container").appendChild(document.getElementById("cita_" + index));
@@ -321,9 +320,7 @@
                 case "Cita anulada":
                     document.getElementById("container3").appendChild(document.getElementById("cita_" + index));
                     break;
-                // Puedes agregar más casos según tus necesidades
                 default:
-                    // Manejar otros casos si es necesario
                     break;
             }
         }
@@ -341,7 +338,6 @@
                 case "Reptiles":
                     return Reptiles.src;
                 default:
-                    // Puedes manejar el caso por defecto aquí si es necesario
                     return "";
             }
         }

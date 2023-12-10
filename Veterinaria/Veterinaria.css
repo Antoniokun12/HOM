@@ -154,9 +154,9 @@ button:hover {
     text-align: center;
     background-color: #ada3cb;
     margin-bottom: 30px;
-    width: 390px;
     margin-top: 30px;
-    margin-left: 32%;
+    width: 390px;
+    margin-left: auto;
     margin-right: auto;
 }
 
@@ -196,4 +196,24 @@ button:hover {
 
 .miSelect:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 500px){
+    .container{
+        margin: 0%;
+        width: 100vh;
+    }
+    .Registrar{
+        margin: 0%;
+    }
+}
+
+@media (max-width: 440px){
+    .container{
+        margin: 0%;
+        width: 100vh;
+    }
+    .Registrar{
+        margin: 0%;
+    }
 }
