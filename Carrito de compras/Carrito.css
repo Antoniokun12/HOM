@@ -52,9 +52,11 @@ header {
     right: 0;
     background-color: white;
     padding: 1em;
+    overflow: auto;
     border: 1px solid #111010;
     display: none;
     max-width: 900px;
+    height: 60vh;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -178,3 +180,16 @@ a:hover {
     text-decoration: underline;
 }
 
+@media (max-width: 519px){
+    .carrito-container {
+        width: 450px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 485px){
+    .carrito-container {
+        width: 400px;
+        font-size: 10px;
+    }
+}
