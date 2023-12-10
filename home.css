@@ -23,6 +23,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin-top: 3%;
+    gap: 30px;
     margin-left: 15%;
     margin-right: 15%;
     background-color: #E5E7E9;

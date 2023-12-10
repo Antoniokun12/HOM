@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Veterinaria.css">
+
+    <title>Veterinaria - Citas</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Veterinaria</h1>
+        <button id="toggleFormButton" onclick="toggleForm(); resetearFormulario(); Limpiar();" >Agendar Cita</button>
+
+        <section class="register" id="register" style="display: none;">
+            <form id="miFormulario" style="display: none;">
+                <h4>Formulario Registro</h4>
+                <h3 id="alert" class="alert"></h3>
+                <input class="controls" type="text" name="nombres" id="nombres" placeholder="Nombre de la mascota"
+                    required>
+                <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Nombre del propietario"
+                    required>
+                <input class="controls" type="text" name="Telefono" id="Telefono" placeholder="Telefono" required>
+                <div class="genero" id="generoo">
+                    <label class="desplegable" for="genero">Tipo de mascota</label>
+                    <select class="gen-select" name="genero" id="genero">
+                        <option value="Mamiferos">Mamiferos</option>
+                        <option value="Aves">Aves</option>
+                        <option value="Anfibios">Anfibios</option>
+                        <option value="Reptiles">Reptiles</option>
+                        <option value="Peces">Peces</option>
+                    </select>
+                </div>
+                <label for="appointmentTime" class="desple">Fecha de la Cita:</label>
+                <input class="controls" type="date" name="date" id="date" required>
+                <label for="appointmentTime" class="desple">Hora de la Cita:</label>
+                <input class="controls" type="time" id="time" required>
+                <button class="Registrar" type="button" onclick="validar()">Registrar</button>
+            </form>
+        </section>
+
+        <div class="status-buttons">
+            <button onclick="citaa()">Citas Abiertas</button>
+            <button onclick="citac()">Citas Cerradas</button>
+            <button onclick="citaanu()">Citas Anuladas</button>
+        </div>
+
+        <div class="bloque" id="container" style="display: none;">
+
+        </div>
+
+        <div id="container2" style="display: none;">
+
+        </div>
+
+        <div id="container3" style="display: none;">
+
+        </div>
+
+    </div>
+
+    <script>
+        let Datos = [];
+        let op = null;
+        let indice = null;
+        let Mamiferos = new Image();
+        let Anfibios = new Image();
+        let Aves = new Image();
+        let Peces = new Image();
+        let Reptiles = new Image();
+        Mamiferos.src = 'Mamiferos.jpg';
+        Anfibios.src = 'Anfibios.jpg';
+        Aves.src = 'Aves.jpg';
+        Peces.src = 'Peces.jpg';
+        Reptiles.src = 'Reptiles.jpg';
+
+        function editarInformacion(r, i) {
+            console.log("Editando información de la cita:", r, i);
+            op = true;
+            indice = i;
+            document.getElementById("nombres").value = r.nombre;
+            document.getElementById("apellidos").value = r.apellido;
+            document.getElementById("Telefono").value = r.telefono;
+            document.getElementById("genero").value = r.genero;
+            document.getElementById("date").value = r.fechaNacimiento;
+            document.getElementById("time").value = r.horadecita;
+        }
+
+
+        function toggleForm() {
+            var formulario = document.getElementById("miFormulario");
+            formulario.style.display = (formulario.style.display === "none" || formulario.style.display === "") ? "block" : "none";
+            var register = document.getElementById("register");
+            register.style.display = (register.style.display === "none" || register.style.display === "") ? "block" : "none";
+        }
+
+        function citaa() {
+            var citasabiertas = document.getElementById("container");
+            citasabiertas.style.display = (citasabiertas.style.display === "none" || citasabiertas.style.display === "") ? "block" : "none";
+        }
+
+        function citac() {
+            var citascerradas = document.getElementById("container2");
+            citascerradas.style.display = (citascerradas.style.display === "none" || citascerradas.style.display === "") ? "block" : "none";
+        }
+
+        function citaanu() {
+            var citasanuladas = document.getElementById("container3");
+            citasanuladas.style.display = (citasanuladas.style.display === "none" || citasanuladas.style.display === "") ? "block" : "none";
+        }
+
+        function Registrar() {
+            let nombre = document.getElementById("nombres").value;
+            let apellido = document.getElementById("apellidos").value;
+            let telefono = document.getElementById("Telefono").value;
+            let genero = document.getElementById("genero").value;
+            let fechaNacimiento = document.getElementById("date").value;
+            let horadecita = document.getElementById("time").value;
+
+            if (op === true) {
+                Datos[indice].nombre = document.getElementById("nombres").value
+                Datos[indice].apellido = document.getElementById("apellidos").value
+                Datos[indice].telefono = document.getElementById("Telefono").value
+                Datos[indice].genero = document.getElementById("genero").value
+                Datos[indice].fechaNacimiento = document.getElementById("date").value
+                Datos[indice].horadecita = document.getElementById("time").value
+            } else {
+                Datos.push({
+                    nombre: nombre,
+                    apellido: apellido,
+                    telefono: telefono,
+                    genero: genero,
+                    fechaNacimiento: fechaNacimiento,
+                    horadecita: horadecita,
+                });
+            }
+            console.log(Datos);
+            document.getElementById("container").innerHTML = "";
+
+            Limpiar();
+            pintar();
+            op = false;
+        }
+
+        function validar() {
+            const Tele = document.getElementById("Telefono").value;
+            const genero = document.getElementById("genero").value;
+            const fechaIngresada = new Date(document.getElementById("date").value);
+            const fechaActual = new Date();
+            const horaIngresada = document.getElementById("time").value;
+            const hora = parseInt(horaIngresada.split(":")[0], 10);
+            if (document.getElementById("nombres").value == "") {
+                document.getElementById("alert").textContent = "Por favor el nombre de la mascota esta vacio";
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else if (document.getElementById("apellidos").value == "") {
+                document.getElementById("alert").textContent = "Por favor el nombre del propietario esta vacio";
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else if (document.getElementById("Telefono").value == "") {
+                document.getElementById("alert").textContent = "Por favor el numero de telefono esta vacio";
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else if (/[^\d]/.test(Tele)) {
+                document.getElementById("alert").textContent = "Por favor ingrese un numero de telefono valido";
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else if (!genero) {
+                document.getElementById("alert").textContent = "Por favor escoja un genero valido";
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else if (document.getElementById("date").value == "") {
+                document.getElementById("alert").textContent = "Por favor la fecha esta vacia";
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else if (fechaIngresada <= fechaActual) {
+                document.getElementById("alert").textContent = "Por favor ingrese una fecha a partir de mañana";
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else if (hora < 7 || hora >= 18) {
+                document.getElementById("alert").textContent = "Por favor ingrese una hora entre las 7 am y las 6 pm";
+
+                setTimeout(() => {
+                    document.getElementById("alert").textContent = "";
+                }, 3000);
+            } else {
+                Registrar();
+            }
+        }
+
+        function pintar() {
+            // Limpiar los contenedores antes de volver a pintar
+            document.getElementById("container").innerHTML = "";
+            document.getElementById("container2").innerHTML = "";
+            document.getElementById("container3").innerHTML = "";
+
+            let fragment = document.createDocumentFragment();
+
+            Datos.forEach((item, index) => {
+                let div = document.createElement("div");
+                div.classList.add("cards");
+                div.id = "cita_" + index;
+
+                let h2 = document.createElement("h2");
+                h2.textContent = item.nombre;
+
+                let img = document.createElement("img");
+                img.id = "imagenMascota" + index;
+                img.src = obtenerRutaImagen(item.genero);
+                img.alt = "Imagen de la mascota";
+                img.classList.add("imagenes");
+
+                let h4 = document.createElement("h2");
+                h4.textContent = `Propietario: ${item.apellido}`;
+
+                let h5 = document.createElement("h2");
+                h5.textContent = `Telefono: ${item.telefono}`;
+
+                let h6 = document.createElement("h2");
+                h6.textContent = `Tipo de mascota: ${item.genero}`;
+
+                let h7 = document.createElement("h2");
+                h7.textContent = `Fecha de la cita: ${item.fechaNacimiento}`;
+
+                let h8 = document.createElement("h2");
+                h8.textContent = `Hora de la cita: ${item.horadecita}`;
+
+                let edita = document.createElement("button")
+                edita.textContent = "Editar Informacion"
+                edita.id = "editarinfo";
+                edita.addEventListener("click", () => {
+                    editarInformacion(item, index);
+                    toggleForm();
+                })
+
+                let selectElement = document.createElement("select");
+                selectElement.id = "miSelect_" + index;
+                selectElement.classList.add("miSelect")
+                let opciones = ["Cita abierta", "Cita cerrada", "Cita anulada"];
+                for (var i = 0; i < opciones.length; i++) {
+                    var opcion = document.createElement("option");
+                    opcion.text = opciones[i];
+                    opcion.value = i + 1;
+                    selectElement.add(opcion);
+                }
+
+                let editar = document.createElement("button");
+                editar.textContent = "Editar Cita";
+                editar.addEventListener("click", () => {
+                    cambiarEstado(index);
+                });
+
+                div.appendChild(h2);
+                div.appendChild(img);
+                div.appendChild(h4);
+                div.appendChild(h5);
+                div.appendChild(h6);
+                div.appendChild(h7);
+                div.appendChild(h8);
+                div.appendChild(edita);
+                div.appendChild(selectElement);
+                div.appendChild(editar);
+
+                fragment.appendChild(div);
+
+                // Mover la cita al contenedor correcto según su estado
+                switch (item.estado) {
+                    case "Cita abierta":
+                        document.getElementById("container").appendChild(fragment);
+                        break;
+                    case "Cita cerrada":
+                        document.getElementById("container2").appendChild(fragment);
+                        break;
+                    case "Cita anulada":
+                        document.getElementById("container3").appendChild(fragment);
+                        break;
+                    // Agregar más casos según sea necesario
+                }
+                document.getElementById("container").appendChild(fragment);
+
+            });
+        }
+
+
+        function Limpiar() {
+            document.getElementById("nombres").value = "";
+            document.getElementById("apellidos").value = "";
+            document.getElementById("Telefono").value = "";
+            document.getElementById("genero").value = "Mamiferos";
+            document.getElementById("date").value = "";
+            document.getElementById("time").value = "";
+        }
+
+        function cambiarEstado(index) {
+            var select = document.getElementById("miSelect_" + index);
+            var nuevoEstado = select.options[select.selectedIndex].text;
+
+            // Encuentra la cita correspondiente en el arreglo Datos
+            var cita = Datos[index];
+
+            // Actualiza el estado de la cita
+            cita.estado = nuevoEstado;
+
+            // Mueve la cita al contenedor correspondiente
+            switch (nuevoEstado) {
+                case "Cita abierta":
+                    document.getElementById("container").appendChild(document.getElementById("cita_" + index));
+                    break;
+                case "Cita cerrada":
+                    document.getElementById("container2").appendChild(document.getElementById("cita_" + index));
+                    break;
+                case "Cita anulada":
+                    document.getElementById("container3").appendChild(document.getElementById("cita_" + index));
+                    break;
+                // Puedes agregar más casos según tus necesidades
+                default:
+                    // Manejar otros casos si es necesario
+                    break;
+            }
+        }
+
+        function obtenerRutaImagen(genero) {
+            switch (genero) {
+                case "Mamiferos":
+                    return Mamiferos.src;
+                case "Anfibios":
+                    return Anfibios.src;
+                case "Aves":
+                    return Aves.src;
+                case "Peces":
+                    return Peces.src;
+                case "Reptiles":
+                    return Reptiles.src;
+                default:
+                    // Puedes manejar el caso por defecto aquí si es necesario
+                    return "";
+            }
+        }
+
+        function resetearFormulario() {
+            document.getElementById("miFormulario").reset();
+        }
+
+        
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="Carrito.css">
+</head>
+
+<body>
+    <header>
+        <h1>Tanjiro Company</h1>
+    </header>
+
+    <div>
+        <img src="Fondo.jpg" class="Fondo">
+    </div>
+
+    <div id="container"></div>
+
+
+
+
+    <button id="ver-carrito-btn" class="boton" onclick="mostrarCarrito()">Ver Carrito</button>
+
+    <div class="carrito-container" id="carrito-container">
+        <h2>Carrito de Compras</h2>
+        <ul id="carrito-lista"></ul>
+        <div class="carrito-resumen">
+            <span>Total: <span id="total-carrito">0.00</span></span>
+            <button onclick="ocultarCarrito()" class="comprar-ahora-boton">Cerrar Carrito</button>
+            <button onclick="vaciarCarrito()" class="comprar-ahora-boton">Vaciar Carrito</button>
+        </div>
+    </div>
+
+    </div>
+    <footer>
+        <div class="footer-section">
+            <h1>Sobre Nosotros</h1>
+            <h2>Tanjiro company</h2>
+            <p>
+                Nos apasiona llevar el gaming a un nivel superior. Somos expertos en la creación de PCs gamers potentes
+                <br>
+                y personalizadas que ofrecen un rendimiento excepcional. Desde hardware de vanguardia hasta diseños
+                estéticos, <br>
+                cada detalle está cuidadosamente seleccionado para proporcionarte una experiencia de juego inigualable.
+                <br>
+            </p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <p>Correo: <a href="antonio3128849488@gmail.com">antonio3128849488@gmail.com</a></p>
+            <p>Teléfono: <a href="3128849488">3128849488</a></p>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        class Carrito {
+            constructor() {
+                this.productosEnCarrito = [];
+            }
+
+            agregarProducto(producto) {
+                const productoEnCarrito = this.productosEnCarrito.find(p => p.id === producto.id);
+
+                if (productoEnCarrito) {
+                    productoEnCarrito.cantidad += 1;
+                } else {
+                    this.productosEnCarrito.push({ ...producto, cantidad: 1 });
+                }
+            }
+
+            calcularTotal() {
+                return this.productosEnCarrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
+            }
+
+            eliminarProducto(id) {
+                this.productosEnCarrito = this.productosEnCarrito.filter(p => p.id !== id);
+            }
+        }
+
+        const carrito = new Carrito();
+
+        let productos = [
+            { id: 1, nombre: "Tarjeta Grafica", precio: 10000, estrella: "⭐⭐⭐⭐⭐", img: "Tarjeta.png" },
+            { id: 2, nombre: "Procesador", precio: 5000, estrella: "⭐⭐⭐⭐⭐", img: "Procesador.webp" },
+            { id: 3, nombre: "RAM", precio: 10000, estrella: "⭐⭐⭐⭐⭐", img: "Ram.webp" },
+            { id: 4, nombre: "Unidad de estado solido", precio: 5000, estrella: "⭐⭐⭐⭐⭐", img: "Estadosolido.jpg" },
+            { id: 5, nombre: "Placa base", precio: 10000, estrella: "⭐⭐⭐⭐⭐", img: "placa.webp" },
+            { id: 6, nombre: "Refrigeracion liquida", precio: 5000, estrella: "⭐⭐⭐⭐⭐", img: "Refrigeracion.jpeg" },
+            { id: 7, nombre: "Teclado", precio: 10000, estrella: "⭐⭐⭐⭐⭐", img: "Teclado.webp" },
+            { id: 8, nombre: "Monitor", precio: 5000, estrella: "⭐⭐⭐⭐⭐", img: "Monitor.jpg" },
+            { id: 9, nombre: "Auriculares", precio: 10000, estrella: "⭐⭐⭐⭐⭐", img: "Auriculares.jpg" },
+            { id: 10, nombre: "Silla Gamer", precio: 5000, estrella: "⭐⭐⭐⭐⭐", img: "Silla.jpeg" },
+            { id: 11, nombre: "Fuente de poder", precio: 10000, estrella: "⭐⭐⭐⭐⭐", img: "Fuente.jpg" },
+            { id: 12, nombre: "Torre", precio: 5000, estrella: "⭐⭐⭐⭐⭐", img: "Torre.jpg" },
+        ]
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            pintar();
+        });
+
+        function pintar() {
+            let fragment = document.createDocumentFragment();
+            productos.forEach((item, index) => {
+                let div = document.createElement("div");
+                div.classList.add("div");
+                let img = document.createElement("img");
+                img.src = item.img;
+                img.classList.add("imagenes");
+                let h2 = document.createElement("h2");
+                h2.textContent = item.nombre;
+                let p = document.createElement("p");
+                p.textContent = item.precio.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+                let es = document.createElement("h2");
+                es.textContent = item.estrella;
+                let button = document.createElement("button");
+                button.textContent = "Agregar al Carrito";
+                button.classList.add("boton");
+                button.addEventListener("click", () => {
+                    agregarAlCarrito(item);
+                });
+                div.appendChild(img);
+                div.appendChild(h2);
+                div.appendChild(p);
+                div.appendChild(es);
+                div.appendChild(button);
+                fragment.appendChild(div);
+            });
+
+            document.getElementById("container").appendChild(fragment);
+        }
+
+        function agregarAlCarrito(producto) {
+            carrito.agregarProducto(producto);
+            actualizarCarrito();
+        }
+
+        function mostrarCarrito() {
+            document.getElementById('carrito-container').style.display = 'block';
+        }
+
+        function ocultarCarrito() {
+            document.getElementById('carrito-container').style.display = 'none';
+        }
+
+        function actualizarCarrito() {
+            const listaCarrito = document.getElementById('carrito-lista');
+            const totalCarrito = document.getElementById('total-carrito');
+
+            listaCarrito.innerHTML = '';
+
+            carrito.productosEnCarrito.forEach(producto => {
+                const li = document.createElement('li');
+                li.classList.add("gripp");
+                li.innerHTML = `
+                    <div class="coge">
+                        <img src="${producto.img}" alt="${producto.nombre}" style="max-width: 50px; max-height: 50px; margin-right: 1em;">
+                        <span>${producto.nombre}</span>
+                        <span>Cantidad: ${producto.cantidad}</span>
+                        <span>Precio unitario: ${producto.precio.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
+                        <span>Total: ${(producto.precio * producto.cantidad).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</span>
+                        <span class="eliminar-icono" onclick="eliminarDelCarrito(${producto.id})">❌</span>
+                        <button class="comprar-ahora-boton" onclick="comprarAhora(${producto.id})">Comprar ahora</button>
+                        
+                    </div>`;
+                listaCarrito.appendChild(li);
+            });
+
+            totalCarrito.textContent = carrito.calcularTotal().toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+
+            mostrarCarrito();
+        }
+
+        function eliminarDelCarrito(id) {
+            carrito.eliminarProducto(id);
+            actualizarCarrito();
+        }
+
+        function vaciarCarrito() {
+            carrito.productosEnCarrito = [];
+            actualizarCarrito();
+        }
+
+    </script>
+</body>
+
+</html>
